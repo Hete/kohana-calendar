@@ -1,10 +1,9 @@
-kohana-calendar
-===============
+# Kohana calendar
 
 Kohana calendar is a simple calendar module. It handles events and present them
 nicely in a Bootstrap clean design.
 
-How to use
+## How to use
 
 This prints a week calendar starting on monday of the current week
 
