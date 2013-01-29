@@ -1,60 +1,15 @@
-<style>
+<?php echo View::factory("calendar/assets") ?>
 
-    .event {
-        position: absolute; 
-        overflow: hidden; 
-        margin: 0; 
-        width: 100%; 
-        max-width: 100%; 
-        padding: 0;
-        right: 0;    
-    }
-
-    .event + .event {
-
-        width: 80%;
-    }
-
-
-</style>
-
-<script type="text/javascript">
-
-    var Calendar = {
-        
-        init: function() {
-            
-            $(".event").hover(Calendar.mouseInEvent, Calendar.mouseOutEvent);
-            
-        },
-        mouseInEvent: function() {
-            $(this).css("z-index", 999999);           
-            
-        },
-        mouseOutEvent: function() {
-            $(this).css("z-index", null);           
-            
-        }        
-        
-    };
-    
-    $(document).ready(Calendar.init);
-
-
-</script>
-
-<table class="calendar table table-bordered">
+<table class="calendar week table table-bordered table-hover">
 
     <?php $time = Calendar::timetogmtime(strtotime($date) - (strtotime($date) % Date::DAY)) ?>
 
     <tr>
-        <td></td>
-        <th colspan="7" style="text-align: center;"><?php echo Date::formatted_time($date, "F") ?></th>
-
+        <th colspan="8" style="text-align: center;"><?php echo Date::formatted_time($date, "F") ?></th>
     </tr>
 
     <tr>
-        <th></th>
+        <th style="text-align: center;">GMT -5</th>
 
         <?php foreach (Calendar::$days_of_week as $day): ?>
             <th style="text-align: center;"><?php echo date("l", $time) ?></th>
@@ -75,7 +30,7 @@
 
                 <?php if ($hour === 0): ?>
 
-                    <td rowspan="24" style="position: relative; padding-left: 0px;">
+                    <td rowspan="24" class="day">
 
                         <?php foreach ($events as $event): ?>
 
@@ -91,10 +46,8 @@
                                 $bottom = number_format($bottom, 2, ".", "");
                                 ?>
 
-                                <div class="success event" style="top: <?php echo $top ?>%; bottom: <?php echo $bottom ?>%; ">
-                                    <div style="margin:5px">
-                                        <?php echo View::factory("calendar/event", array("event" => $event)) ?>
-                                    </div>
+                                <div class="event-container" style="top: <?php echo $top ?>%; bottom: <?php echo $bottom ?>%; ">
+                                    <?php echo View::factory("calendar/event", array("event" => $event)) ?>
                                 </div>
 
 

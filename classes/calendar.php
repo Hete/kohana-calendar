@@ -8,6 +8,10 @@
  */
 class Calendar {
 
+    /**
+     *
+     * @var array 
+     */
     public static $days_of_week = array(
         "lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi", "dimanche"
     );
@@ -20,13 +24,27 @@ class Calendar {
         return $time + 5 * Date::HOUR;
     }
 
+    /**
+     * Renders an event.
+     * 
+     * @param Model_Event $event
+     * @return type
+     */
     public static function event(Model_Event $event) {
         return View::factory("calendar/event", array("event" => $event));
     }
 
+    /**
+     * Renders a calendar for a day.
+     * 
+     * @param type $date
+     * @param array $events
+     * @return type
+     */
     public static function day($date = NULL, array $events = array()) {
 
         if ($date === NULL) {
+            // Today, simply
             $date = Date::now();
         }
 
@@ -34,6 +52,7 @@ class Calendar {
     }
 
     /**
+     * Renders a calendar for a week.
      * 
      * @param string $date first day in week
      * @param array $events events 
@@ -42,19 +61,37 @@ class Calendar {
     public static function week($date = NULL, array $events = array(), $earliest_hour = 0, $latest_hour = 23) {
 
         if ($date === NULL) {
+            // Monday of this week
             $date = Date::now();
         }
 
         return View::factory("calendar/week", array("date" => $date, "events" => $events, "earliest_hour" => $earliest_hour, "latest_hour" => $latest_hour));
     }
 
+    /**
+     * Renders a calendar starting with a month.
+     * @param type $date
+     * @param array $events
+     * @return type
+     */
     public static function month($date = NULL, array $events = array()) {
 
         if ($date === NULL) {
-            $date = Date::now();
+            // First of this month
+            $date = Date::formatted_time("now", "Y-m-1");
         }
 
         return View::factory("calendar/month", array("events" => $events));
+    }
+
+    /**
+     * Renders a calendar starting with a month.
+     * @param type $date
+     * @param array $events
+     * @return type
+     */
+    public static function planning($date = NULL, array $events = array()) {
+        
     }
 
 }
