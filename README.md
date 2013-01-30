@@ -12,7 +12,7 @@ This prints a week calendar starting on monday of the current week
 
 You may define the starting day
 
-    echo Calendar::("2013-09-02");
+    echo Calendar::week("2013-09-02");
 
 And also add events in in
 
@@ -20,4 +20,6 @@ And also add events in in
 
     $events = array($event);
 
-    echo Calendar::("2013-09-02", $events);
+    echo Calendar::week("2013-09-02", $events);
+
+Months, days and plannings are on their way!

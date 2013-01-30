@@ -12,7 +12,7 @@
  */
 class Model_Event extends Model {
 
-    public $start, $end, $title, $description, $attributes;
+    public $start, $end, $title, $description, $type, $attributes;
 
     /**
      * 
@@ -29,6 +29,7 @@ class Model_Event extends Model {
         $this->description = $description;
         $this->start = $start;
         $this->end = $end;
+        $this->type = $type;
         $this->attributes = $attributes;
     }
 
