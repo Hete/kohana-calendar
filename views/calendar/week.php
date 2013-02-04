@@ -1,18 +1,18 @@
 <?php echo View::factory("calendar/assets") ?>
 
-<table class="calendar week table table-bordered table-hover">
+<table class="calendar week table table-bordered">
 
     <?php $time = Calendar::timetogmtime(strtotime($date) - (strtotime($date) % Date::DAY)) ?>
 
     <tr>
-        <th colspan="8" style="text-align: center;"><?php echo Date::formatted_time($date, "F") ?></th>
+        <th colspan="8" style="text-align: center;"><?php echo Date::formatted_time($date, "F Y") ?></th>
     </tr>
 
     <tr>
         <th style="text-align: center;">GMT -5</th>
 
         <?php foreach (Calendar::$days_of_week as $day): ?>
-            <th style="text-align: center;"><?php echo date("l", $time) ?></th>
+            <th style="text-align: center;"><?php echo date("l d", $time) ?></th>
             <?php $time += Date::DAY ?>
         <?php endforeach; ?>
     </tr>   
@@ -46,7 +46,7 @@
                                 $bottom = number_format($bottom, 2, ".", "");
                                 ?>
 
-                                <div class="event-container" style="top: <?php echo $top ?>%; bottom: <?php echo $bottom ?>%; ">
+                                <div class="event-container  <?php echo $event->type ?>" style="top: <?php echo $top ?>%; bottom: <?php echo $bottom ?>%; ">
                                     <?php echo View::factory("calendar/event", array("event" => $event)) ?>
                                 </div>
 
